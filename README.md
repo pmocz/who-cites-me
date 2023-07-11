@@ -3,7 +3,7 @@ Search SAO/NASA ADS to generate a list of people who cite you the most often
 
 Philip Mocz (2023) @PMocz
 
-# Running the code
+## How to run the script
 
 Edit your name and add your ADS token to the Python script, and run:
 
