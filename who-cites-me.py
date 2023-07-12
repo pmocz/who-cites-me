@@ -28,7 +28,7 @@ author_counter = Counter()
 
 
 # a function that turns "Lastname, Firstname I." -> "Lastname, F"
-prettify_author_name = lambda author: author.split(",")[0] + ", " + author.split(",")[1].strip()[0]
+prettify_author_name = lambda author: author.split(",")[0] + ", " + (author.split(",")[1].strip()[0] if len(author.split(","))>1 else "")
 
 
 # Search for my papers
@@ -55,7 +55,7 @@ articles = []
 for idx, bibcode in tqdm(enumerate(bibcode_counter)):
 	articles.append(list(ads.SearchQuery(bibcode=bibcode, fl=['id', 'bibcode', 'author']))[0])
 	time.sleep(0.1) # to limit query rate
-	
+
 print('... author list complete!')
 
 # Tally up the number of times each author cites me
@@ -66,7 +66,7 @@ for article in articles:
 
 # Print list of 30 most common authors that cite me
 print('Listing most common authors that cite me:')
-most_common = author_counter.most_common(30)	
+most_common = author_counter.most_common(min(len(author_counter),30))	
 for idx, pair in enumerate(most_common):
 	print('#', idx+1, ': ', pair[0], ' (', pair[1], ')')
 
