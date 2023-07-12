@@ -11,7 +11,7 @@ __author__ = "Philip Mocz <philip.mocz@gmail.com>"
 import ads
 from collections import Counter
 from tqdm import tqdm
-
+import time
 
 
 # **********************************************************************
@@ -54,6 +54,7 @@ print('Creating complete author list of all works that cite me (may take a few m
 articles = []
 for idx, bibcode in tqdm(enumerate(bibcode_counter)):
 	articles.append(list(ads.SearchQuery(bibcode=bibcode, fl=['id', 'bibcode', 'author']))[0])
+	time.sleep(0.1) # to limit query rate
 	
 print('... author list complete!')
 
